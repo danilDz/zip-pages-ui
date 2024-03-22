@@ -1,0 +1,19 @@
+@import '../../global-styles/variables.scss';
+
+.page404Div {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.link {
+  font-size: 20px;
+  text-decoration: none;
+  color: $button-color;
+  transition: all 0.2s;
+
+  &:hover {
+    color: $text-color;
+  }
+}

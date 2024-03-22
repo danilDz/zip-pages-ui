@@ -1,0 +1,28 @@
+.pagesListDiv {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+
+  .sortingControlsDiv {
+    width: 100%;
+    height: 32px;
+    display: flex;
+    align-items: self-start;
+    justify-content: space-between;
+    padding: 0 32px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    box-sizing: border-box;
+
+    .control {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+
+      p {
+        font-size: 14px;
+        margin: 0;
+        margin-right: 7px;
+      }
+    }
+  }
+}

@@ -1,0 +1,33 @@
+@import './font.scss';
+@import './variables.scss';
+
+.button {
+  cursor: pointer;
+  background-color: $button-color;
+  color: $text-color;
+  border: none;
+  border-radius: 8px;
+  width: 237px;
+  font-size: 16px;
+  font-weight: 900;
+  font-family: $custom-font;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mobileButton {
+  width: 39px;
+  display: none;
+}
+
+@media screen and (max-width: 390px) {
+  .desktopButton {
+    display: none;
+  }
+
+  .mobileButton {
+    display: flex;
+  }
+}

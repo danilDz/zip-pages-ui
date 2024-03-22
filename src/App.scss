@@ -1,0 +1,16 @@
+@import '/src/global-styles/variables.scss';
+@import '/src/global-styles/font.scss';
+
+body {
+  margin: 0;
+}
+
+.app {
+  width: 100%;
+  min-height: 100vh;
+  background-color: $background-color;
+  color: $text-color;
+  font-family: $custom-font;
+  display: flex;
+  justify-content: center;
+}

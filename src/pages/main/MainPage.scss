@@ -1,0 +1,16 @@
+@import '../../global-styles/variables.scss';
+
+.mainPageDiv {
+  width: 100%;
+  display: flex;
+
+  .sideDiv {
+    width: $side-div-width-desktop;
+    border-right: 1px solid $table-color;
+  }
+
+  .tableMainDiv {
+    width: calc(100% - $side-div-width-desktop);
+    padding: 24px 24px 0px;
+  }
+}
