@@ -110,8 +110,38 @@
   }
 }
 
-@media screen and (max-width: 390px) {
-  .pagesTableDiv .tableDiv .header {
-    height: 39px;
+@media screen and (max-width: 768px) {
+  .pagesTableDiv {
+    position: relative;
+    left: -10%;
+    width: 110%;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .pagesTableDiv {
+    left: 0;
+    width: 100%;
+
+    .tableDiv .header {
+      height: 39px;
+
+      .title {
+        font-size: 25px;
+      }
+    }
+
+    .paginationDiv {
+      font-size: 12px;
+      height: 30px;
+
+      .controls {
+        width: 222px;
+
+        .perPageDiv #perPage {
+          font-size: 12px;
+        }
+      }
+    }
   }
 }

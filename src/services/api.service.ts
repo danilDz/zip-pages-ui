@@ -1,3 +1,4 @@
+import { ISortObject } from '../components/pages-table/PagesTable';
 import { useHttp } from '../hooks/http.hook';
 import { PageModel } from '../models/page.model';
 
@@ -22,8 +23,11 @@ const useApiService = () => {
     );
   };
 
-  const getManyPages = async (offset: number, limit: number) => {
-    return await request(`${baseUrl}/api/pages/get-many?offset=${offset}&limit=${limit}`, 'json');
+  const getManyPages = async (offset: number, limit: number, sortObject: ISortObject) => {
+    return await request(
+      `${baseUrl}/api/pages/get-many?offset=${offset}&limit=${limit}&sortField=${sortObject.field}&sortOrder=${sortObject.order}`,
+      'json'
+    );
   };
 
   return {

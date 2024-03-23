@@ -8,13 +8,20 @@ import { rowsPerPage } from '../../constants';
 import ArrowSrc from '../../assets/arrow-left.svg';
 import './PagesTable.scss';
 
+export interface ISortObject {
+  field: 'title' | 'size';
+  order: 'ASC' | 'DESC';
+}
+
 interface IViewProps {
   pagesList: PageModel[];
   pagesCount: number;
   offset: number;
   limit: number;
+  sortObject: ISortObject;
   onLimitChange: (event: React.ChangeEvent) => void;
   onPageChange: (page: 'next' | 'prev') => void;
+  onSortObjectChange: (object: ISortObject) => void;
 }
 
 const PagesTable: React.FunctionComponent = () => {
@@ -23,11 +30,12 @@ const PagesTable: React.FunctionComponent = () => {
   const [pagesCount, setPagesCount] = useState<null | number>(null);
   const [limit, setLimit] = useState<number>(import.meta.env.VITE_DEFAULT_PAGES_LIMIT);
   const [offset, setOffset] = useState<number>(0);
+  const [sortObject, setSortObject] = useState<ISortObject>({ field: 'title', order: 'ASC' });
 
   useEffect(() => {
     async function fetchPagesList() {
       clearError();
-      const fetchedPages = await getManyPages(offset, limit);
+      const fetchedPages = await getManyPages(offset, limit, sortObject);
       if (fetchedPages.statusCode) return;
       setPagesList(fetchedPages.pagesList);
       setPagesCount(fetchedPages.count);
@@ -35,7 +43,7 @@ const PagesTable: React.FunctionComponent = () => {
     }
 
     fetchPagesList();
-  }, [limit, offset]);
+  }, [limit, offset, sortObject]);
 
   const onLimitChange = (event: React.ChangeEvent) => {
     const newLimit = parseInt((event.target as HTMLSelectElement).value);
@@ -47,6 +55,10 @@ const PagesTable: React.FunctionComponent = () => {
     else setOffset((prev) => prev - limit);
   };
 
+  const onSortObjectChange = (object: ISortObject) => {
+    setSortObject({ ...object });
+  };
+
   return (
     <div className="pagesTableDiv">
       {setContent(process, View, {
@@ -54,8 +66,10 @@ const PagesTable: React.FunctionComponent = () => {
         pagesCount,
         offset,
         limit,
+        sortObject,
         onLimitChange,
         onPageChange,
+        onSortObjectChange,
       })}
     </div>
   );
@@ -66,8 +80,10 @@ const View: React.FunctionComponent<IViewProps> = ({
   pagesCount,
   offset,
   limit,
+  sortObject,
   onLimitChange,
   onPageChange,
+  onSortObjectChange,
 }) => {
   return (
     <>
@@ -82,13 +98,18 @@ const View: React.FunctionComponent<IViewProps> = ({
           </Link>
         </div>
         <div className="pagesList">
-          <PagesList pagesList={pagesList} />
+          <PagesList
+            pagesList={pagesList}
+            sortObject={sortObject}
+            onSortChange={onSortObjectChange}
+          />
         </div>
       </div>
       {pagesList.length ? (
         <div className="paginationDiv">
           <p>
-            {offset + 1}-{offset + limit >= pagesCount ? pagesCount : offset + limit} of {pagesCount}
+            {offset + 1}-{offset + limit >= pagesCount ? pagesCount : offset + limit} of{' '}
+            {pagesCount}
           </p>
           <div className="controls">
             <div className="perPageDiv">

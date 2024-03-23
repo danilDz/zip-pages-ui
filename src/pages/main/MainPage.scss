@@ -14,3 +14,30 @@
     padding: 24px 24px 0px;
   }
 }
+
+@media screen and (max-width: 768px) {
+  .mainPageDiv {
+    .sideDiv {
+      width: $side-div-width-tablet;
+    }
+
+    .tableMainDiv {
+      width: calc(100% - $side-div-width-tablet);
+      padding-top: 41px;
+    }
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .mainPageDiv {
+    .sideDiv {
+      width: 0;
+      border: none;
+    }
+
+    .tableMainDiv {
+      width: 100vw;
+      padding: 85px 16px 0px;
+    }
+  }
+}
